@@ -1,13 +1,30 @@
-from urllib import request
+
 from os import path
+import requests
+
+SESSION_FILE = "session.txt"
+
 
 def get_input(day):
+
     file_name = f"inputs/{day:02}.txt"
 
-    file = open(file_name, "r")
-    data = file.read()
-    file.close()
-    
+    if path.exists(file_name):
+        file = open(file_name, "r")
+        data = file.read()
+        file.close()
+    else:
+        file = open(SESSION_FILE, "r")
+        session = file.read()
+        file.close()
+        cookies = {"session": session}
+
+        url = f"https://adventofcode.com/2021/day/{day}/input"
+
+        data = requests.get(url, cookies=cookies).text
+
+        file = open(file_name, "w")
+        file.write(data)
+        file.close()
+
     return data
-
-
