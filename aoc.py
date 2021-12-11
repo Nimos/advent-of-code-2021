@@ -5,11 +5,14 @@ import requests
 SESSION_FILE = "session.txt"
 
 
-def get_input(day):
+def get_input(day, small=False):
 
-    file_name = f"inputs/{day:02}.txt"
+    if small:
+        file_name = f"inputs/{day:02}.small.txt"
+    else:
+        file_name = f"inputs/{day:02}.txt"
 
-    if path.exists(file_name):
+    if path.exists(file_name) or small:
         file = open(file_name, "r")
         data = file.read()
         file.close()
