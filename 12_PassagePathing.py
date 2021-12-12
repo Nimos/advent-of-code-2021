@@ -38,8 +38,7 @@ def walk_caves(caves, path, max_visits=1):
     paths = [
         walk_caves(caves, path + [cave], max_visits)
         for cave in caves[cur]
-        if cave != START_ROOM 
-        and path.count(cave) < max_visits or cave.isupper()
+        if cave != START_ROOM and path.count(cave) < max_visits or cave.isupper()
     ]
 
     # Flatten the returned list of lists
