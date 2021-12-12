@@ -22,7 +22,7 @@ def parse_tree(data):
     return caves
 
 
-def walk_caves(caves, path, max_visits=1):
+def walk_caves(caves, path=[START_ROOM], max_visits=1):
     cur = path[-1]
 
     if cur == END_ROOM:
@@ -43,9 +43,9 @@ def walk_caves(caves, path, max_visits=1):
 
     # Flatten the returned list of lists
     flat = []
-    for path in paths:
-        for p in path:
-            flat.append(p)
+    for branches in paths:
+        for path in branches:
+            flat.append(path)
 
     return flat
 
@@ -56,9 +56,9 @@ if __name__ == "__main__":
     caves = parse_tree(data)
 
     print("Part 1:")
-    paths = walk_caves(caves, [START_ROOM])
+    paths = walk_caves(caves)
     print(len(paths))
 
     print("Part 2:")
-    paths = walk_caves(caves, [START_ROOM], max_visits=2)
+    paths = walk_caves(caves, max_visits=2)
     print(len(paths))
